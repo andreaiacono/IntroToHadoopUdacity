@@ -1,0 +1,4 @@
+Other Ideas
+
+- since the students vote for the nodes they find useful for a better understading of the course, we could extract the most scored nodes to understand which parts of the course coulb be improved
+- 
