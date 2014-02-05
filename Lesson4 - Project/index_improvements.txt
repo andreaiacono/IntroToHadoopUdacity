@@ -1,0 +1,4 @@
+Index improvement
+
+- We can build an index based on tags, so that we can get all the questions that have the specified tag
+- we can build an index based on students that wrote the post

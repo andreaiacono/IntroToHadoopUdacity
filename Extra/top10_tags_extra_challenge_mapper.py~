@@ -29,7 +29,7 @@ for line in reader:
 			# gets the score of this post
 			score = int(line[9])
 			
-			# loop over the list of tags
+			# loop over th elist of tags
 			for tag in post_tags:
 				
 				# if the dictionary already contains the tag

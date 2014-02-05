@@ -8,6 +8,9 @@ tags = {}
 # use CSV reader for reading the TSV
 reader = csv.reader(sys.stdin, delimiter='\t')
 
+# skip the header 
+next(reader, None)
+
 for line in reader:
 	# if the row has 19 fields
     if len(line) == 19:
