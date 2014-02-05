@@ -1,0 +1,10 @@
+udacity	2939
+python	3009
+bug	3178
+st101	4336
+cs212	5134
+meta	6381
+cs253	6600
+discussion	10087
+cs373	12811
+cs101	14634
