@@ -1,6 +1,0 @@
-The first thing we need to know is how big tha data are. For examples: if we're dealing with thousands of users and tens of thousands of posts, probably a set of SQL queries are the fastest way to obtain the needed data. Otherwise, if we're dealing with tens of millions of users and hundreds of millions posts, then MapReduce could be an attractive option to process the data.
-Also we need to know if the processed data have to be shown to a user through an interactive interface: if so, for sure MapReduce is not an option since it processes the data as batches. Maybe MapReduce can be used to make some kind of summarization and then import the results into the RDBMS, so that the summarized data can be showed to the user via SQL queries.
-
-
-??? Also it would be nice to know the structure of the database: if the query to obtain the results is a complicated query that contains several joins and takes a lot of time, maybe approaching the problem with MapReduce can be a good idea, though multiple joins in MapReduc are complicated as well.
-
