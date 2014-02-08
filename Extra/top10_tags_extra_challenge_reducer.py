@@ -2,40 +2,75 @@
 
 import sys
 import operator
+import csv
 
+# dictionary that contains the student id as the key and 
+# her/his reputation as the value
+student = {}
+
+# dictionary that contains the tag as the key and 
+# its score as value
 tags = {}
 
+# set the reader for the TSV data file
+reader = csv.reader(sys.stdin, delimiter='\t',  quotechar='"', quoting=csv.QUOTE_ALL)
+
 # read from the output of mappers
-for line in sys.stdin:
+for line in reader:
 	
-	# divides the row using the tab as splitter
-    data_mapped = line.strip().split("\t")
+	# if there are only two fields
+	if len(line) == 2:
 
-	# if there aren't exactly two fields, there's an error
-    if len(data_mapped) != 2:
-        continue
-	
-	# get the tag and the number of times it's present in posts
-    tag, score = data_mapped
-	
-    # if it's the first time we see this tag
-    if tags.has_key(tag):
-		
-		# we set its value into the dictionary
-		tags[tag] += int(score)
+		# if we're receiving a user 
+		# (check on the first char of the key)
+		if line[0][0] == 'A':
 
-	# if the tag is already inside the dictionary
-    else:
-		
-		# add the new value to the existing
-		tags[tag] = int(score)
+			# get the student id removing the prepending 'A'
+			student_id = line[0][1:]
 
-# sort the items by their value
+			# get the reputation
+			reputation = int(line[1])
+			
+			# add the student's reputation to the dictionary
+			student[student_id] = reputation
+
+		# if we're receiving a tag
+		# (check on the first char of the key)
+		elif line[0][0] == 'B':
+
+			# get the tag removing the prepending 'B'
+			tag = line[0][1:]
+
+			# get the student id 
+			student_id = line[1]
+			
+			# defensive check
+			# if student_id is not in the dictionary
+			if not student.has_key(student_id):
+			
+				# it means the data of user and nodes is not coherent because
+				# in nodes file are present nodes that have an author_id that 
+				# is not present in the users file. So just skip it.
+				continue;
+
+			# if the dictionary contains the tag			
+			if tags.has_key(tag):
+				
+				# increment by the reputation of the student this tag
+				tags[tag] += student[student_id]
+			
+			# if the dictionary does not contain the tag
+			else:
+				
+				# set the reputation of the student as the tag value
+				tags[tag] = student[student_id]
+
+# sort the tags by their score
 sorted_tags = sorted(tags.iteritems(), key=operator.itemgetter(1))
 
-# loop over the last 10 items (the ones that have bigger values)
+# loop over the last 10 tags (the ones that have highest scores)
 for tag in sorted_tags[-10:]:
 	
-	# and output them
+	# and output the tag and its score
     print "{0}\t{1}".format(tag[0], tag[1])
 
