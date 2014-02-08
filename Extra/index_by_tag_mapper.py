@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
-# this mapreduce program indexes the questions based on tags
+# this mapreduce program indexes the questions by tags
 
 import sys
 import csv
 
-# init the dictionary that will contain all the tags
+# dictionary that contains the tag as the key and
+# a list of node ids (that contain that tag) as the value
 tags = {}
 
 # use CSV reader for reading the TSV
@@ -14,7 +15,7 @@ reader = csv.reader(sys.stdin, delimiter='\t')
 # skip the header 
 next(reader, None)
 
-# loops over the input file
+# loop over the input file
 for line in reader:
 
 	# if the row has 19 fields
@@ -41,7 +42,7 @@ for line in reader:
 				# if dictionary does not contain this tag
 				else:
 
-					# sets the score as the new value for this tag
+					# set the score as the new value for this tag
 					tags[tag] = [id]
 
 # loop over the collected tags

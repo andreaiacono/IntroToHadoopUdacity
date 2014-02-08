@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
-# this mapreduce program indexes all the nodes by the students that posted them
+# this mapreduce program indexes all the nodes by student id
 
 import sys
 import csv
 
-# init the dictionary that will contain all the students
+# dictionary that contains the student id as the key and
+# a list of node ids as the value
 students = {}
 
 # use CSV reader for reading the TSV
@@ -14,7 +15,7 @@ reader = csv.reader(sys.stdin, delimiter='\t')
 # skip the header 
 next(reader, None)
 
-# loops over the input file
+# loop over the input file
 for line in reader:
 
 	# if the row has 19 fields
@@ -29,18 +30,20 @@ for line in reader:
 		# if the dictionary already contains the student
 		if students.has_key(student):
 			
-			# add the id of the node to the list of nodes posted by this student
+			# add the id of the node to the list of node ids posted by this student
 			students[student].append(id)
 
 		# if dictionary does not contain this student
 		else:
 
-			# sets the id of the node as the first element of a new list
+			# set the id of the node as the first element of a new list
 			students[student] = [id]
 
 # loop over the collected students
 for student in students:
 
-	# and output them to the reducers
+	# and output the student id and a list of node ids
+	# (the list of node ids is formatted as the
+	# string representation of a python list)
     print "{0}\t{1}".format(student,students[student])
 

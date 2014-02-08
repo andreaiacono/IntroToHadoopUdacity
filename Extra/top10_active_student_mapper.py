@@ -5,7 +5,8 @@
 import sys
 import csv
 
-# init the dictionary that will contain all the students
+# dictionary that contains the student id as the key and
+# and her/his score as the value
 students = {}
 
 # use CSV reader for reading the TSV
@@ -14,7 +15,7 @@ reader = csv.reader(sys.stdin, delimiter='\t')
 # skip the header 
 next(reader, None)
 
-# loops over the input file
+# loop over the input file
 for line in reader:
 
 	# if the row has 19 fields
@@ -43,12 +44,12 @@ for line in reader:
 		# if dictionary does not contain this student
 		else:
 
-			# sets the score as the new value for this student
+			# set the score as the new value for this student
 			students[student] = score
 
 # loop over the collected student
 for student in students:
 
-	# and output them to the reducers
+	# and output the student id and her/his score to the reducers
     print "{0}\t{1}".format(student,students[student])
 
