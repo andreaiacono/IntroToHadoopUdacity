@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-# this mapreduce program extract the top10 most active students in the forums.
+# This mapreduce program extract the top10 most active students in the forums. For balancing the activeness of the
+# students, we assume that a question is more important than an answer, and an answer more important than a comment.
 
 import sys
 import csv
@@ -27,7 +28,7 @@ for line in reader:
 		# get the id of the author of the question
 		student = line[3]
 
-		# computes the score
+		# compute the score
 		if line[5] == 'question':
 			score = 3
 		elif line[5] == 'answer':
