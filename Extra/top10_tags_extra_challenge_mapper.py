@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
-# This mapreduce program extract the top 10 tags weighted to the student's reputation
-# that wrote the question: the higher the student's score, the higher the importance 
-# given to that tag. The program combines two datasets: the users and the nodes. Since
-# in the reducer's code we need all the users data before the nodes data, in the output
-# of the mapper we prepend an 'A' character to the keys formed when reading the users
-# file and we prepend a 'B'  character to the keys formed when reading the nodes file.
+# This mapreduce program is intended for the extra challenge. The weighted score I'll
+# order the tag by is the student's reputation: the higher the student's reputation, 
+# the higher the importance given to that tag. The program combines two datasets: the 
+# users and the nodes. Since in the reducer's code we need all the users data before 
+# the nodes data, in the output of the mapper we prepend an 'A' character to the keys
+# formed when reading the users file and we prepend a 'B'  character to the keys formed
+# when reading the nodes file.
 
 import sys
 import csv
